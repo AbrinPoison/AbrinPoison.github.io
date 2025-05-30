@@ -1,574 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Launching Soon - Heartbot</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Europa&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heartbot</title>
+  <style>
+    /* RESET & BASE */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
 
-  /* Reset and base */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    font-family: 'Europa', sans-serif;
-    overflow-x: hidden;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  button {
-    cursor: pointer;
-    border: none;
-  }
-  /* Container max widths */
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  /* Header */
-  header {
-    padding: 1rem 1.5rem;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    border-bottom: 1px solid #222;
-    text-transform: uppercase;
-    color: #e63946;
-  }
-
-  /* Hero */
-  .hero {
-    padding: 4rem 1.5rem 5rem;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: left;
-    animation: fadeInUp 0.8s ease forwards;
-  }
-  .hero h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-  }
-  .hero p {
-    color: #aaa;
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  .btn-primary {
-    background: #e63946;
-    color: #fff;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-right: 1rem;
-    transition: background 0.3s ease;
-  }
-  .btn-primary:hover {
-    background: #b32a38;
-  }
-  .btn-secondary {
-    background: transparent;
-    border: 2px solid #fff;
-    padding: 0.7rem 1.8rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: #fff;
-    font-weight: 600;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-  .btn-secondary:hover {
-    background: #fff;
-    color: #000;
-  }
-  .btn-group {
-    display: flex;
-    gap: 1rem;
-  }
-
-  /* Slider */
-  .slider {
-    position: relative;
-    max-width: 800px;
-    height: 500px;
-    margin: 0 auto 4rem;
-    border-radius: 20px;
-    overflow: hidden;
-  }
-  .slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1s ease;
-    z-index: 0;
-  }
-  .slide.active {
-    opacity: 1;
-    z-index: 10;
-  }
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #000;
-  }
-  .slide-gradient {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    pointer-events: none;
-  }
-  .slider-btn {
-    position: absolute;
-    top: 50%;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    border: none;
-    font-size: 1.8rem;
-    line-height: 36px;
-    text-align: center;
-    transform: translateY(-50%);
-    user-select: none;
-    transition: background 0.3s ease;
-  }
-  .slider-btn:hover {
-    background: rgba(0,0,0,0.75);
-  }
-  .slider-btn.prev {
-    left: 1rem;
-  }
-  .slider-btn.next {
-    right: 1rem;
-  }
-  .slider-dots {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
-  }
-  .dot {
-    width: 12px;
-    height: 6px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .dot.active {
-    width: 30px;
-    background: #e63946;
-  }
-
-  /* Features grid */
-  .features {
-    background: #000;
-    color: #fff;
-    padding: 4rem 1.5rem;
-  }
-  .features-grid {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-    gap: 2rem;
-    border-top: 1px solid rgba(255 255 255 / 0.2);
-    border-bottom: 1px solid rgba(255 255 255 / 0.2);
-    padding: 2rem 0;
-  }
-  .feature-item {
-    padding: 1rem 2rem;
-    border-left: 1px solid rgba(255 255 255 / 0.2);
-  }
-  .feature-item:first-child {
-    border-left: none;
-  }
-  .feature-icon {
-    display: inline-block;
-    margin-right: 0.75rem;
-    vertical-align: middle;
-    color: #e63946;
-    width: 28px;
-    height: 28px;
-    fill: currentColor;
-  }
-  .feature-title {
-    font-weight: 700;
-    font-size: 1.25rem;
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .feature-desc {
-    margin-top: 0.25rem;
-    color: #aaa;
-    font-size: 0.9rem;
-    max-width: 280px;
-  }
-
-  /* Steps section */
-  .steps-section {
-    background: #fff;
-    color: #000;
-    border-radius: 3rem 3rem 0 0;
-    padding: 4rem 1.5rem 6rem;
-  }
-  .steps-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    gap: 2rem;
-  }
-  .steps-bar {
-    width: 6px;
-    background: #e63946;
-    border-radius: 99px;
-    position: relative;
-    overflow: hidden;
-  }
-  .steps-progress {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #e63946;
-    border-radius: 99px;
-    transform-origin: top;
-    transition: height 0.3s ease;
-  }
-  .steps-list {
-    flex: 1;
-    margin-left: 2rem;
-  }
-  .step-item {
-    margin-bottom: 3rem;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: all 0.7s ease;
-  }
-  .step-item.active {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  .step-item.passed {
-    opacity: 0.4;
-    transform: translateX(0);
-  }
-  .step-title {
-    font-weight: 700;
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-  }
-  .step-desc {
-    color: #555;
-    font-size: 1rem;
-    max-width: 450px;
-  }
-
-  /* Heart video section */
-  .video-section {
-    background: #000;
-    padding: 6rem 1.5rem 5rem;
-    border-radius: 3rem 3rem 0 0;
-    position: relative;
-    max-width: 450px;
-    margin: 0 auto 3rem;
-  }
-  .video-section video {
-    width: 100%;
-    border-radius: 3rem 3rem 0 0;
-    box-shadow: 0 20px 40px rgb(0 0 0 / 0.8);
-    display: block;
-  }
-  .video-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-  }
-  .video-text {
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: 0.15em;
-    color: white;
-    user-select: none;
-    animation: fadeScale 1.2s ease forwards;
-  }
-
-  /* Affiliate section */
-  .affiliate-section {
-    background: #fff;
-    color: #000;
-    padding: 3rem 1.5rem 5rem;
-    border-radius: 3rem 3rem 0 0;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .affiliate-section h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  .affiliate-desc {
-    color: #555;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .affiliate-btn {
-    background: #e63946;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 0.75rem 3rem;
-    border-radius: 50px;
-    border: none;
-    transition: background 0.3s ease;
-  }
-  .affiliate-btn:hover {
-    background: #b32a38;
-  }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(50px);
+    .hero {
+      height: 100vh;
+      position: relative;
+      background: linear-gradient(-45deg, #8b0000, #a30000, #660000, #3b0000);
+      background-size: 600% 600%;
+      animation: gradientBG 20s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1rem;
+      overflow: hidden;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.6), transparent 40%);
+      mix-blend-mode: overlay;
+      animation: ripple 10s ease infinite;
     }
-  }
-  @keyframes fadeScale {
-    0% {
-      opacity: 0;
-      transform: scale(0.98);
+    .hero-content {
+      max-width: 600px;
+      animation: fadeInUp 1s ease 0.5s forwards;
+      z-index: 1;
     }
-    50% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1.02);
-    }
-  }
+    .hero .countdown-label {
+  font-size: 8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #ff4d4d;
+  text-shadow: 0 0 20px rgba(0,0,0,0.7);
+  letter-spacing: 0.3rem;
+  width: 100%;
+  text-align: center;
+}
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 2.75rem;
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #ff4c4c;
+      text-transform: uppercase;
+      letter-spacing: .1em;
     }
-    .features-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .steps-container {
-      flex-direction: column;
-    }
-    .steps-bar {
-      width: 100%;
-      height: 8px;
+    .hero p {
+      font-size: 1.25rem;
       margin-bottom: 1.5rem;
+      color: #ddd;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      border-left: 3px solid #fff;
+      border-bottom: 3px solid #fff;
+      transform: translateX(-50%) rotate(-45deg);
+      animation: bounceArrow 2s infinite;
+      z-index: 1;
+    }
+
+    .countdown {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: .05em;
+      background: linear-gradient(135deg, #660000, #990000);
+      background-size: 200% 200%;
+      animation: pulseGradient 5s ease infinite;
+      box-shadow: 0 0 30px rgba(255,0,0,0.3);
+      margin-bottom: 0.5rem;
+    }
+    .countdown span { display: inline-block; min-width: 2ch; }
+    .powered-line {
+      font-size: 0.875rem;
+      color: #ccc;
+      margin-top: 0.25rem;
+    }
+
+    .steps { background: #111; color: #fff; padding: 4rem 1rem; }
+    .steps .container { display: flex; gap: 2rem; align-items: stretch; max-width: 1200px; margin: 0 auto; }
+    .steps-bar {
+      position: relative;
+      width: 6px;
+      background: #444;
+      border-radius: 3px;
+      overflow: hidden;
+      height: 400px;
     }
     .steps-progress {
-      height: 100% !important;
-      width: 0;
-      background: #e63946;
-      border-radius: 0;
-      transform-origin: left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #ff3333;
+      height: 0%;
+      transition: height .5s ease;
     }
-    .steps-list {
-      margin-left: 0;
+    .steps-list { flex: 1; }
+    .step { opacity: 0; transform: translateX(-20px); transition: all .7s ease; margin-bottom: 2rem; }
+    .step.active { opacity: 1; transform: translateX(0); }
+    .step.passed { opacity: .4; transform: translateX(0); }
+    .step h3 { font-size: 1.75rem; margin-bottom: .5rem; }
+    .step p { color: #bbb; }
+
+    .video-section { position: relative; max-width: 600px; margin: 4rem auto; border-radius: 1rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    .video-section video { width: 100%; display: block; }
+    .video-text { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; letter-spacing: .1em; color: #fff; pointer-events: none; transition: opacity .5s ease; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #000;
+      color: #777;
+      font-size: 0.875rem;
     }
-  }
-</style>
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulseGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; filter: hue-rotate(0deg);}
+      50% { background-position: 100% 50%; filter: hue-rotate(0deg);}
+      100% { background-position: 0% 50%; filter: hue-rotate(0deg);}
+    }
+    @keyframes ripple { 0% { transform: scale(1); opacity: 0.15; } 50% { transform: scale(1.2); opacity: 0.05; } 100% { transform: scale(1); opacity: 0.15; } }
+    @keyframes bounceArrow { 0%, 20% { transform: translateX(-50%) rotate(-45deg) translateY(0);} 50% { transform: translateX(-50%) rotate(-45deg) translateY(10px);} 100% { transform: translateX(-50%) rotate(-45deg) translateY(0);} }
+
+    @media(max-width:768px){
+      .hero .countdown-label { font-size: 4rem; letter-spacing: 0.7em; margin-top: -1rem; }
+      .hero h2 { font-size: 1.5rem; }
+      .countdown { font-size: 1.5rem; }
+      .video-text { font-size: 2rem; }
+      .steps-bar { height: 200px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>HEARTBOT</header>
-
-<section class="hero container" aria-label="Launch hero section">
-  <h1>Scale your outreach like never before</h1>
-  <p>Reach thousands of marketplaces in minutes.</p>
-  <div class="btn-group">
-    <button class="btn-primary" type="button">Start your campaign</button>
-    <button class="btn-secondary" type="button">Learn More</button>
-  </div>
-</section>
-
-<section class="slider" aria-label="Image slider">
-  <div class="slide active">
-    <img src="https://i.imgur.com/gxxXM2N.png" alt="Advertising illustration" />
-    <div class="slide-gradient"></div>
-  </div>
-  <div class="slide">
-    <img src="https://i.imgur.com/mGDNJpm.png" alt="Promotion illustration" />
-    <div class="slide-gradient"></div>
-  </div>
-  <div class="slide">
-    <img src="https://i.imgur.com/0cyTQlz.png" alt="Heartbot concept illustration" />
-    <div class="slide-gradient"></div>
-  </div>
-  <button class="slider-btn prev" aria-label="Previous slide">&#10094;</button>
-  <button class="slider-btn next" aria-label="Next slide">&#10095;</button>
-  <div class="slider-dots" role="tablist" aria-label="Slider navigation">
-    <button class="dot active" aria-label="Slide 1" role="tab" aria-selected="true"></button>
-    <button class="dot" aria-label="Slide 2" role="tab" aria-selected="false"></button>
-    <button class="dot" aria-label="Slide 3" role="tab" aria-selected="false"></button>
-  </div>
-</section>
-
-<section class="features" aria-label="Key features">
-  <div class="features-grid container">
-    <div class="feature-item">
-      <svg class="feature-icon" viewBox="0 0 24 24"><path d="M3 12l7-8v16l-7-8zM14 12l7-8v16l-7-8z"/></svg>
-      <span class="feature-title">Fast Setup</span>
-      <p class="feature-desc">Get campaigns up and running within minutes with no hassle.</p>
-    </div>
-    <div class="feature-item">
-      <svg class="feature-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none" fill="currentColor"/></svg>
-      <span class="feature-title">Automated Scale</span>
-      <p class="feature-desc">Effortlessly reach thousands of marketplaces in just one click.</p>
-    </div>
-    <div class="feature-item">
-      <svg class="feature-icon" viewBox="0 0 24 24"><path d="M5 19l7-7 7 7"/></svg>
-      <span class="feature-title">Reliable Analytics</span>
-      <p class="feature-desc">Track every impression and click with precise real-time data.</p>
-    </div>
-  </div>
-</section>
-
-<section class="steps-section" aria-label="Steps to success">
-  <div class="container steps-container">
-    <div class="steps-bar" aria-hidden="true">
-      <div class="steps-progress" style="height: 33%;"></div>
-    </div>
-    <div class="steps-list" role="list">
-      <div class="step-item active" role="listitem" tabindex="0">
-        <h3 class="step-title">1. Launch</h3>
-        <p class="step-desc">Start by creating your campaign quickly and easily.</p>
+  <!-- HERO + COUNTDOWN -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="countdown-label">Heartbot</div>
+      <h2>Launching soon!</h2>
+      <p>We’re hard at work crafting something incredible</p>
+      <div class="countdown" id="countdown">
+        <span id="days">00</span> days,
+        <span id="hours">00</span> hours,
+        <span id="mins">00</span>:<span id="secs">00</span>
       </div>
-      <div class="step-item" role="listitem" tabindex="0">
-        <h3 class="step-title">2. Scale</h3>
-        <p class="step-desc">Automate your outreach to thousands of marketplaces at once.</p>
+      <div class="powered-line">Powered by The Poisoned Cookies 🍪</div>
+    </div>
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- STEPS WITH PROGRESS BAR -->
+  <section class="steps">
+    <div class="container">
+      <div class="steps-bar">
+        <div class="steps-progress" id="steps-progress"></div>
       </div>
-      <div class="step-item" role="listitem" tabindex="0">
-        <h3 class="step-title">3. Analyze</h3>
-        <p class="step-desc">Use real-time data to optimize and maximize your impact.</p>
+      <div class="steps-list" role="list">
+        <div class="step active"><h3>Automate</h3><p>Automate your advertisement without dealing with command lines.</p></div>
+        <div class="step"><h3>Scale</h3><p>Focus on upgrading your business while we take care of the marketing.</p></div>
+        <div class="step"><h3>Connect</h3><p>Connect with thousands of marketplaces in a few seconds.</p></div>
+        <div class="step"><h3>Manage</h3><p>Manage your plans for the price that suits you.</p></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="video-section" aria-label="Heartbot heart video">
-  <video src="https://cdn.heartbot.app/heart.mp4" autoplay muted loop playsinline></video>
-  <div class="video-overlay">
+  <!-- HEART VIDEO + ROTATING TEXT -->
+  <section class="video-section">
+    <video src="heart.mp4" autoplay muted loop playsinline></video>
     <div class="video-text" id="video-text">advertise.</div>
-  </div>
-</section>
+  </section>
 
-<section class="affiliate-section" aria-label="Affiliate call to action">
-  <h2>Join Our Affiliate Program</h2>
-  <p class="affiliate-desc">Earn commission by promoting Heartbot and help others scale their business fast.</p>
-  <button class="affiliate-btn" type="button">Become an Affiliate</button>
-</section>
+  <!-- FOOTER -->
+  <footer>
+    Powered by The Poisoned Cookies 🍪<br>
+    &copy; 2025 The Poisoned Cookies. All rights reserved.
+  </footer>
 
-<script>
-  // Slider logic
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
-  const prevBtn = document.querySelector('.slider-btn.prev');
-  const nextBtn = document.querySelector('.slider-btn.next');
-  let currentSlide = 0;
+  <script>
+    // COUNTDOWN
+    const launch = new Date('2025-06-15T00:00:00').getTime();
+    const daysEl = document.getElementById('days'),
+          hrsEl  = document.getElementById('hours'),
+          minsEl = document.getElementById('mins'),
+          secsEl = document.getElementById('secs');
 
-  function showSlide(idx) {
-    if (idx < 0) idx = slides.length - 1;
-    if (idx >= slides.length) idx = 0;
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === idx);
-      dots[i].classList.toggle('active', i === idx);
-      dots[i].setAttribute('aria-selected', i === idx ? 'true' : 'false');
-    });
-    currentSlide = idx;
-  }
+    function tick() {
+      const d = launch - Date.now();
+      if (d <= 0) return;
+      const days = Math.floor(d / 864e5),
+            hrs  = Math.floor(d % 864e5 / 36e5),
+            mins = Math.floor(d % 36e5  / 6e4),
+            secs = Math.floor(d % 6e4   / 1e3);
 
-  prevBtn.addEventListener('click', () => {
-    showSlide(currentSlide - 1);
-  });
-  nextBtn.addEventListener('click', () => {
-    showSlide(currentSlide + 1);
-  });
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      showSlide(i);
-    });
-  });
+      daysEl.textContent = String(days).padStart(2,'0');
+      hrsEl .textContent = String(hrs).padStart(2,'0');
+      minsEl.textContent = String(mins).padStart(2,'0');
+      secsEl.textContent = String(secs).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
 
-  // Animated text cycling for video overlay
-  const videoTextEl = document.getElementById('video-text');
-  const texts = ['advertise.', 'promote.', 'heartbot'];
-  let textIndex = 0;
+    // ROTATING TEXT
+    const texts = ['advertise.','promote.','heartbot'],
+          vtxt  = document.getElementById('video-text');
+    let ti = 0;
+    setInterval(()=>{
+      vtxt.style.opacity = 0;
+      setTimeout(()=>{
+        ti = (ti + 1) % texts.length;
+        vtxt.textContent = texts[ti];
+        vtxt.style.opacity = 1;
+      }, 500);
+    }, 5000);
 
-  function cycleText() {
-    videoTextEl.style.opacity = '0';
-    setTimeout(() => {
-      textIndex = (textIndex + 1) % texts.length;
-      videoTextEl.textContent = texts[textIndex];
-      videoTextEl.style.opacity = '1';
-    }, 500);
-  }
-  setInterval(cycleText, 3000);
-
-  // Steps animation
-  const stepItems = document.querySelectorAll('.step-item');
-  let currentStep = 0;
-
-  function updateSteps(step) {
-    stepItems.forEach((item, i) => {
-      if (i < step) {
-        item.classList.add('passed');
-        item.classList.remove('active');
-      } else if (i === step) {
-        item.classList.add('active');
-        item.classList.remove('passed');
-        item.focus();
-      } else {
-        item.classList.remove('active', 'passed');
-      }
-    });
-    const progressEl = document.querySelector('.steps-progress');
-    progressEl.style.height = ((step + 1) / stepItems.length) * 100 + '%';
-  }
-
-  // Animate steps every 5 seconds
-  setInterval(() => {
-    currentStep = (currentStep + 1) % stepItems.length;
-    updateSteps(currentStep);
-  }, 5000);
-
-  updateSteps(currentStep);
-</script>
-
+    // STEPS PROGRESS
+    const steps = document.querySelectorAll('.step'),
+          prog  = document.getElementById('steps-progress');
+    let st = 0;
+    setInterval(()=>{
+      steps.forEach((el,i)=>{
+        el.classList.toggle('active', i === st);
+        el.classList.toggle('passed', i < st);
+      });
+      prog.style.height = `${(st + 1) / steps.length * 100}%`;
+      st = (st + 1) % steps.length;
+    }, 5000);
+  </script>
 </body>
 </html>
