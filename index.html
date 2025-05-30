@@ -21,6 +21,7 @@
       text-align: center;
       padding: 0 1rem;
       overflow: hidden;
+      flex-direction: column;
     }
     .hero::before {
       content: '';
@@ -36,15 +37,15 @@
       z-index: 1;
     }
     .hero .countdown-label {
-  font-size: 8rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  color: #ff4d4d;
-  text-shadow: 0 0 20px rgba(0,0,0,0.7);
-  letter-spacing: 0.3rem;
-  width: 100%;
-  text-align: center;
-}
+      font-size: 8rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #ff4d4d;
+      text-shadow: 0 0 20px rgba(0,0,0,0.7);
+      letter-spacing: 0.3rem;
+      width: 100%;
+      text-align: center;
+    }
 
     .hero h2 {
       font-size: 2.5rem;
@@ -91,6 +92,28 @@
       font-size: 0.875rem;
       color: #ccc;
       margin-top: 0.25rem;
+    }
+
+    .top-links {
+      position: absolute;
+      font-weight: bold;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+      font-size: 1.25rem;
+      color: #ddd;
+      z-index: 2;
+    }
+    .top-links a {
+      color: #ddd;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .top-links a:hover {
+      color: #ff4d4d;
     }
 
     .steps { background: #111; color: #fff; padding: 4rem 1rem; }
@@ -151,9 +174,11 @@
   </style>
 </head>
 <body>
-
-  <!-- HERO + COUNTDOWN -->
   <section class="hero">
+    <div class="top-links">
+      <div><a href="/tos">ToS</a></div>
+      <div><a href="/privacy">Privacy</a></div>
+    </div>
     <div class="hero-content">
       <div class="countdown-label">Heartbot</div>
       <h2>Launching soon!</h2>
