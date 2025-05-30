@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      font-family: 'Courier New', monospace;
+      color: #ff4d4d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 10rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
+    }
+
+    p {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      color: #fff;
+      opacity: 0.8;
+    }
+
+    .glitch {
+      position: relative;
+      color: #ff4d4d;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+      20% { text-shadow: -2px -2px red, 2px 2px cyan; }
+      40% { text-shadow: 2px 2px red, -2px -2px cyan; }
+      60% { text-shadow: -2px 2px red, 2px -2px cyan; }
+      80% { text-shadow: 2px -2px red, -2px 2px cyan; }
+      100% { text-shadow: 0 0 red, 0 0 cyan; }
+    }
+
+    a {
+      color: #ff4d4d;
+      font-size: 1.5rem;
+      text-decoration: none;
+      border: 2px solid #ff4d4d;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a:hover {
+      background-color: #ff4d4d;
+      color: #0d0d0d;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="glitch">404</h1>
+  <p>Heartbot couldn't find this page... maybe it's off syncing somewhere else.</p>
+  <a href="/">Return Home</a>
+</body>
+</html>
