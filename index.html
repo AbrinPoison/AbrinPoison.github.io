@@ -35,17 +35,23 @@
       max-width: 600px;
       animation: fadeInUp 1s ease 0.5s forwards;
       z-index: 1;
-    }
-    .hero .countdown-label {
-      font-size: 8rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-      color: #ff4d4d;
-      text-shadow: 0 0 20px rgba(0,0,0,0.7);
-      letter-spacing: 0.3rem;
       width: 100%;
-      text-align: center;
     }
+.hero .countdown-label {
+    font-size: clamp(1.5rem, 8vw, 4rem);
+    font-weight: bold;
+    color: #ff4d4d;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0;
+    line-height: 1.1;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 0.5rem;
+  }
+
+
 
     .hero h2 {
       font-size: 2.5rem;
@@ -86,6 +92,7 @@
       animation: pulseGradient 5s ease infinite;
       box-shadow: 0 0 30px rgba(255,0,0,0.3);
       margin-bottom: 0.5rem;
+      white-space: nowrap;
     }
     .countdown span { display: inline-block; min-width: 2ch; }
     .powered-line {
@@ -164,12 +171,45 @@
     @keyframes ripple { 0% { transform: scale(1); opacity: 0.15; } 50% { transform: scale(1.2); opacity: 0.05; } 100% { transform: scale(1); opacity: 0.15; } }
     @keyframes bounceArrow { 0%, 20% { transform: translateX(-50%) rotate(-45deg) translateY(0);} 50% { transform: translateX(-50%) rotate(-45deg) translateY(10px);} 100% { transform: translateX(-50%) rotate(-45deg) translateY(0);} }
 
-    @media(max-width:768px){
-      .hero .countdown-label { font-size: 4rem; letter-spacing: 0.7em; margin-top: -1rem; }
+    /* RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 768px) {
+      .hero .countdown-label {
+        font-size: 4rem;
+        letter-spacing: 0.7em;
+        margin-top: -1rem;
+      }
       .hero h2 { font-size: 1.5rem; }
-      .countdown { font-size: 1.5rem; }
+      .countdown { font-size: 1.5rem; padding: 0.75rem 1.5rem; }
       .video-text { font-size: 2rem; }
       .steps-bar { height: 200px; }
+
+      /* shrink top links on mobile */
+      .top-links {
+        padding: 0 1rem;
+        font-size: 1rem;
+      }
+
+      /* allow hero-content to shrink */
+      .hero-content {
+        max-width: 90%;
+      }
+
+      /* stack steps vertically and hide vertical bar */
+      .steps .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .steps-bar {
+        display: none;
+      }
+      .steps-list {
+        width: 100%;
+      }
+      .step {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        margin-bottom: 1.5rem;
+      }
     }
   </style>
 </head>
